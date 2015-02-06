@@ -1,0 +1,57 @@
+body { 
+    padding-top: 50px; 
+/*    font-size: 1.5em; */
+}
+
+/* interactive nav menu */
+.tw_nav ul li:hover,
+body.sort li.sort,
+body.csv li.csv,
+body.cars li.cars,
+body.lists li.lists
+{ color: #fff; }
+
+.tw_nav ul li:hover a,
+body.sort li.sort a,
+body.csv li.csv a,
+body.cars li.cars a,
+ body.lists li.lists a
+{ 
+    color: #ffffff;
+    background-color: #080808; 
+}
+
+/* Social sharing */
+.social_sharing {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    height: 20px;
+    margin-left: 60px;
+}
+
+.share_link {
+    float: left;
+    margin-right: 10px;
+}
+
+/* Sticky footer */
+html, body {height: 100%;}
+/* Wrapper for page content to push down footer */
+#wrap {
+    min-height: 100%;
+    height: auto;
+    margin: 0 auto -40px; /* Negative indent footer by its height */
+    padding: 0 0 40px; /* Pad bottom by footer height */
+}
+
+.footer {
+    height: 40px; /* Set the fixed height of the footer here */
+    background-color: #C7C7C7;
+}
+
+.container .text-muted {
+    margin: 10px;
+    float: right;
+    color: #4F4D4E;
+}
+

@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% block head_adds %}
+     <link rel="stylesheet" href="{{ STATIC_URL }}csv.css">
+{% endblock %}
+{% block nav-csv %}class="active"{% endblock %}
+
+{% block content %}
+  <div class="page-header">
+    <h1>CSV Analyzer</h1> 
+  </div>
+    <div class="container">
+
+        <p class="lead">Quickly get an understanding of the data in a *.CSV file.</p>
+        <p>
+            When you receive a CSV data file from a client or colleague, this tool will immediately give you 
+            answers to questions such as:
+            <ul>
+                <li>How many rows and columns does the file contain?</li>
+                <li>For each column:</li>
+                <ul>
+                    <li>What is the name and data type?</li>
+                    <li>How many rows are missing data?</li>
+                    <li>How many rows contain unique (as opposed to repeating) values?</li>
+                    <li>What are the minimum, maximum, mean and most frequent values?</li>
+                </ul>
+            </ul>
+        </p>
+        <p>
+            In the time it takes the results page to load, the *.csv file you select will be opened, read,
+            and analyzed. Give it a try!
+        </p>
+        <h2>Choose an example file to analyze...</h2>
+        
+        <form role="form" id="select_file_form" action="" method="post">{% csrf_token %}
+            <div class="radio">
+                <label>
+                    <input type="radio" name="file_choice" value="countries.csv" checked>
+                    <a href="/static/countries.csv">countries.csv</a> 
+                    (obtained from <a href="http://www.andrewpatton.com/countrylist.html">andrewpatton.com</a>)
+                </label>
+            </div>
+            <div class="radio">
+                <label>
+                    <input type="radio" name="file_choice" value="customers.csv">
+                    <a href="/static/customers.csv">customers.csv</a> 
+                    (synthetic data from <a href="http://www.briandunning.com/sample-data/">briandunning.com</a>)
+                </label>
+            </div>
+            <div class="radio">
+                <label>
+                    <input type="radio" name="file_choice" value="baseball_teams.csv">
+                    <a href="/static/baseball_teams.csv">baseball_teams.csv</a> 
+                    (obtained from <a href="http://seanlahman.com/baseball-archive/statistics/">seanlahman.com</a>)
+                </label>
+            </div>
+            <div class="radio">
+                <label>
+                    <input type="radio" name="file_choice" value="olympic_athletes.csv">
+                    <a href="/static/olympic_athletes.csv">olympic_athletes.csv</a> 
+                    (obtained from <a href="http://webscraping.com/">webscraping.com</a>)
+                </label>
+            </div>
+            <div class="radio">
+                <label>
+                    <input type="radio" name="file_choice" value="us_cities.csv">
+                    <a href="/static/us_cities.csv">us_cities.csv</a>
+                    (obtained from <a href="http://webscraping.com/">webscraping.com</a>)
+                </label>
+            </div>
+            <button type="submit" class="btn btn-primary" id="btn_analyze">Analyze</button>
+        </form>
+<!-- 
+        <h2>...Or try out your own</h2>
+        <form>
+            <div class="radio">
+                <label>
+                    <input type="radio" name="file_choice" id="opt_upload" value="opt_upload">
+                    Upload my own file
+                </label>
+            </div>
+            <div class="form-group" id="file_upload_btn">
+                <input type="file" id="file_chooser">
+            </div>
+        </form>
+-->
+    </div><!-- container -->
+{% endblock %}

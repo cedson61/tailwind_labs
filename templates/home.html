@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block nav-home %}class="active"{% endblock %}
+{% block content %}
+
+  <div class="page-header">
+    <h1>Tailwind Labs <small>a division of Tailwind Solutions, LLC</small></h1>
+  </div>
+
+  <div class="jumbotron">
+    <h1>Welcome!</h1>
+    <p>
+      I created this site as a place to learn, explore and demonstrate some of the web software ideas
+      that collect in my head. Feel free to explore, or <a href="{% url 'about' %}">read more</a> 
+      about how it all works.
+    </p>
+
+  {% if not user.is_authenticated %}
+    <p>
+      Some functionality is publicly available, but explore the <a href="{% url 'items:items_list' %}">Items</a> 
+      feature, you'll need to <a class="btn btn-primary" href="{% url 'tailwind_labs_login' %}" role="button">Log in</a>
+    </p>
+    <p>
+      <a href="mailto:howard.edson@gmail.com">Email me</a> to request account credentials.
+    </p>
+  {% else %}
+    <p>You are logged in. Feel free to explore all the links in the top nav bar, or
+       <a class="btn btn-primary" href="{% url 'tailwind_labs_logout' %}" role="button">Log out</a>
+    </p>
+  {% endif %}
+
+  </div>
+
+{% endblock content %}

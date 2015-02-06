@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block head_adds %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}sort.css">
+    <script src="{{ STATIC_URL }}sort.js"></script>
+{% endblock %}
+{% block nav-sort %}class="active"{% endblock %}
+
+{% block content %}
+  <div class="page-header">
+    <h1>Smart Sort</h1> 
+  </div>
+
+  <div class="container">
+    <p class="lead">A RESTful API for remotely sorting complex data values in a web page.</p>
+    <p>
+    For certain complex data types, such as the screw sizes in this example, a simple alphanumeric
+    sort is not sufficient, failing to meet requirements such as:
+    </p>
+    <ul>
+    	<li>Values of the same pattern must be sorted contiguously</li>
+    	<li>Any invalid values should be recognized as such, and appear at the end of the list</li>
+    	<li>Fractions should be handled appropriately (i.e. 3/8 &lt; 1/2)</li>
+    	<li>Some patterns include two numbers, both of which need to be understood (i.e. 1 &lt; 2 &lt; 10).</li>
+    </ul>
+    <p>
+    This page sends the data to a remote API / web service via AJAX, where it is sorted using 
+    regular expression pattern matching, and then returned to be rendered in this page.
+    </p>
+    <div class="row" id="panels">
+        <div class="col-sm-4 col_1">
+            <div class="panel panel-primary" id="panel_input">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Unsorted Input Data</h3>
+                </div>
+                <div class="panel-body sort-panel">
+                    <p>Try these examples, or paste in your own:</p>
+                    {% csrf_token %}
+                    <textarea class="form-control input-small" id="unsorted" rows="15">{{ test_data }}</textarea>
+                    <input type="button" class="btn btn-primary" id="sort_button" value="Submit">
+                </div> <!-- panel-body -->
+            </div> <!-- panel -->
+        </div> <!-- col 1 -->
+        <div class="col-sm-4 col_2">
+            <div class="panel panel-default" id="panel_simple_sort">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Simple Alphanumeric Sort</h3>
+                </div>
+                <div class="panel-body sort-panel">
+    				<p id="simple_title"></p>
+    				<p id="simple_data"></p>
+                </div> <!-- panel-body -->
+            </div> <!-- panel -->
+        </div> <!-- col 1 -->
+        <div class="col-sm-4 col_3">
+            <div class="panel panel-default" id="panel_result">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Smart Sort</h3>
+                </div>
+                <div class="panel-body sort-panel">
+    				<p id="smart_title"></p>
+    				<p id="smart_data"></p>
+                </div> <!-- panel-body -->
+            </div> <!-- panel -->
+        </div> <!-- col_2 -->
+    </div> <!-- row -->
+  </div><!-- container -->
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block head_adds %}
+     <link rel="stylesheet" href="{{ STATIC_URL }}csv.css">
+{% endblock %}
+{% block nav-csv %}class="active"{% endblock %}
+
+{% block content %}
+  <div class="page-header">
+    <h1>CSV Analyzer</h1> 
+  </div>
+    <div class="container">
+
+    {% if filename %}
+        <h2><span class="text-primary">{{filename}}</span> &#150;
+            <span class="text-success">{{csv_rows}} rows</span> and 
+            <span class="text-success">{{csv_cols}} columns</span> processed
+        </h2>
+            {% if rows %}
+            <div class="table-responsive" id="results_table">
+                <table id="csv_results" class="table table-bordered table-striped table-condensed">
+                    <thead>
+                        <tr>
+                        {% for col in cols %}
+                            <th>
+                                {{ col }}
+                                {% if col == "Data Type" %}<sup>1</sup>
+                                {% elif col == "Percent Missing" %}<sup>2</sup>
+                                {% elif col == "Percent Unique" %}<sup>3</sup>
+                                {% elif col == "Mean" %}<sup>4</sup>
+                                {% endif %}
+                            </th>
+                        {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in rows %}
+                            <tr>
+                                {% for cell in row %}
+                                <td>{{ cell }}</td>
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div> <!-- table div -->
+            {% else %}
+                <p>No data!</p>
+            {% endif %}{% comment %} no rows {% endcomment %}
+    <div id="notes">
+	    <h3>Notes</h3>
+	    <ul>
+	        <li><sup>1</sup> Data Type - A best guess by <a href="http://pandas.pydata.org/">pandas</a>. Float, int64, or "object" for any non-numeric data</li>
+	        <li><sup>2</sup> Percent Missing - count of rows with no data in this column</li>
+	        <li><sup>3</sup> Percent Unique - if a column is 100% unique it is a potential primary key</li>
+	        <li><sup>4</sup> Mean - only calculated for numeric columns; won't make sense for some columns.</li>
+	    </ul>
+	</div>
+    {% else %}
+        <h2>{% if message %}{{message}}{% else %}Something went wrong.{% endif %}</h2>
+        <a href="{% url 'csv_analyzer:home' %}">Try again.</a>
+    {% endif %}{% comment %} no filename {% endcomment %}
+        
+    </div><!-- container -->
+{% endblock %}

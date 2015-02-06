@@ -1,0 +1,3 @@
+*.py[cod]
+secrets.json
+TODO.txt

@@ -1,0 +1,21 @@
+#select_file_form {
+	margin-left: 20px;
+}
+
+#file_upload_btn {
+	margin-top: 10px;
+	margin-left: 20px;
+}
+
+#btn_analyze {
+    margin-top: 10px;
+    margin-bottom: 20px;
+
+}
+
+#results_table {margin-top: 20px;}
+
+#notes {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}

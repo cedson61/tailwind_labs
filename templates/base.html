@@ -1,0 +1,66 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  {% block title %}<title>Tailwind Solutions Labs</title>{% endblock title %}
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+  {% block head_adds %}{% endblock %}
+    <!-- Custom styles for this template -->
+    <link href="{% static "navbar-static-top.css" %}" rel="stylesheet">
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <!-- Static navbar -->
+  <nav class="navbar navbar-inverse navbar-static-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="{% url 'home' %}">Tailwind Labs</a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li {% block nav-home %}{% endblock %}><a href="{% url 'home' %}">Home</a></li>
+          <li {% block nav-items %}{% endblock %}><a href="{% url 'items:items_list' %}">Items</a></li>
+          <li {% block nav-sort %}{% endblock %}><a href="{% url 'smart_sort:ss_page' %}">Smart Sort</a></li>
+          <li {% block nav-csv %}{% endblock %}><a href="{% url 'csv_analyzer:home' %}">CSV Analyzer</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li {% block nav-about %}{% endblock %}><a href="{% url 'about' %}">About</a></li>
+      {% if user.is_authenticated %}
+          <li><a href="{% url 'tailwind_labs_logout' %}">Logout</a></li>
+      {% else %}
+          <li {% block nav-login %}{% endblock %}><a href="{% url 'tailwind_labs_login' %}">Login</a></li>  
+      {% endif %}
+        </ul>
+      </div><!--/.nav-collapse -->
+    </div>
+  </nav>
+
+  <div class="container">
+    {% include "messages.html" %}
+    {% block content %}{% endblock content %}
+  </div>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

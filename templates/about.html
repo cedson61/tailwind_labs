@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block nav-about %}class="active"{% endblock %}
+{% block content %}
+
+  <div class="page-header">
+    <h1>Tailwind Labs <small>a division of Tailwind Solutions, LLC</small></h1>
+  </div>
+
+  <h2>About this site</h2>
+
+  <h3>Overview</h3>
+  <p>
+    I built this site to explore and demonstrate building a database-driven web application in 
+    <a href="http://www.djangoproject.com">Django</a>. Django is a free and open source, secure,
+    scalable MVC web application framework written in the <a href="https://www.python.org/">Python</a>
+    language. Among many others, Django powers Pinterest, Instagram, The Washington Post, Bitbucket and 
+    The Onion.
+  </p>
+  <p>
+    For a consistent, modern look-and-feel that works across browsers and devices, I made use of 
+    <a href="http://www.getbootstrap.com">Bootstrap</a> - a basic CSS/HTML/Javascript framework
+    that provides typography, table styles, buttons, glyphicons pagination controls, and pretty
+    styling for the create and edit forms, and more.
+  </p>
+
+  <h3>Items</h3>
+  <p>
+    I used Django's class-based generic views for reading (with pagination), creating, 
+    updating and deleting "items" from a <a href="http://www.postgresql.org/">PostgreSQL</a> database, 
+    overriding some methods so that deleting an item merely sets it to inactive (leaving it in the database),
+    and so that only 'active' items can be accessed through the site.
+  </p>
+  <p>
+    I also used Django's:
+    <ul>
+      <li>
+        object-relational mapper to implement my Item model and implement 
+        application logic by manipulating item objects in Python instead of writing SQL
+      </li>
+      <li>
+        authentication combined with braces' LoginRequiredMixin to restrict the Items area of the
+        site to authenticated users.
+      </li>
+      <li>
+        brilliant admin interface, for things like resetting user passwords
+        and re-activating an inactivated item.
+      </li>
+    </ul>
+  </p>
+
+  <h3>Smart Sort</h3>
+  <p>
+    Smart Sort demonstrates a simple API for sorting complex data values. Data to be sorted
+    is sent from the web page in the browser to the remote API / web service via AJAX. There,
+    it is sorted using regular expression pattern matching and custom sort rules. Finally, 
+    the API responds by returning JSON back to the browswer where it then appears in this page.
+  </p>
+  <p>
+    I'm using Jquery AJAX and some hand-rolled Javascript on the client, and Django's ability 
+    to receive and send json from a view to implement a simple, functional API.</p>
+
+  <h3>CSV Analyzer</h3>
+  <p>
+    This app consumes a csv file (as might be extracted from a SQL database), and presents summary
+    stats about each column. I haven't yet added the ability to upload your own CSV file, but
+    provided several examples of varying sizes. The <a href="http://pandas.pydata.org/">pandas</a>
+    library made this relatively easy and extremely fast.
+  </p>
+
+{% endblock content %}

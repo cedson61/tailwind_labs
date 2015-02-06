@@ -1,0 +1,12 @@
+{% extends "items/item_base.html" %}
+{% block content %}
+  <div class="page-header">
+    <h1>Items <small>Confirm Delete?</small></h1> 
+  </div>
+
+  <form action="" method="post">{% csrf_token %}
+    <p>Are you sure you want to delete "{{ item.title }}"?</p>
+    <a class="btn btn-default" href="{% url 'items:items_list' %}">Cancel</a>
+    <input class="btn btn-danger" type="submit" value="Delete">
+  </form>
+{% endblock content %}
