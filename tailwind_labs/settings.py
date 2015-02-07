@@ -7,6 +7,7 @@ https://docs.djangoproject.com/en/1.7/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.7/ref/settings/
 """
+# LOCAL
 import json
 from django.core.exceptions import ImproperlyConfigured
 
@@ -35,11 +36,11 @@ ADMINS = ('Howard Edson', 'howard.edson@gmail.com',)
 SECRET_KEY = get_secret('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.tailwindsolutions.com', 'localhost']
 
 
 # Application definition
@@ -111,7 +112,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = '/home/hedson/webapps/tailwind_labs_static'
+STATIC_ROOT = '/home/howard/dev/django/tailwind_labs/static'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )

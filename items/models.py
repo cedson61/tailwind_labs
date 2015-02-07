@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.urlresolvers import reverse
 
+
 class TimeStampedModel(models.Model):
     """An abstract base class for timestamp fields, which can
        then be added to any model (DRY!)"""

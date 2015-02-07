@@ -22,7 +22,7 @@
         <td><a href="{% url 'items:item_detail' item.id %}">{{ item.title }}</a></td>
         <td>{{ item.created }}</td>
         <td>{{ item.modified }}</td>
-        <td>{{ item.url }}</td>
+        <td><a href="{{ item.url }}">{{ item.url }}</a></td>
         <td>
           <a href="{% url 'items:item_update' item.id %}">
           <span class="glyphicon glyphicon-pencil" aria-hidden="true" style="color:orange"></span>

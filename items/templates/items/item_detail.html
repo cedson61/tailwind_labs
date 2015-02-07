@@ -10,7 +10,7 @@
     <li>created: {{ item.created }}</li>
     <li>updated: {{ item.modified }}</li>
     <li>active? {{ item.is_active }}</li>
-    <li><a href="item.url">{{ item.url }}</a></li>
+    <li><a href="{{ item.url }}">{{ item.url }}</a></li>
   </ul>
 
   <a class="btn btn-warning" href="{% url 'items:item_update' item.id %}">Edit item</a>

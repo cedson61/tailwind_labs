@@ -6,8 +6,8 @@ from csvanalyzer import CSVSummary, OUTPUT_COLUMNS, DISPLAYABLE_COLUMNS
 from django.utils.safestring import mark_safe
 import os
 
-# FILE_PATH = 'static/'                                        # local dev
-FILE_PATH = '/home/hedson/webapps/tailwind_labs_static/'   # webfaction
+FILE_PATH = 'static/'                                        # local dev
+# FILE_PATH = '/home/hedson/webapps/tailwind_labs_static/'   # webfaction
 
 
 def select_file(request):

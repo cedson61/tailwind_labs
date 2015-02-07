@@ -1,3 +1,5 @@
 *.py[cod]
 secrets.json
 TODO.txt
+settings.local.py
+settings.webfaction.py
