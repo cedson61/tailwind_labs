@@ -7,26 +7,25 @@ from braces.views import LoginRequiredMixin
 from .models import Item
 
 
-class ItemListView(LoginRequiredMixin, ListView):
+class UserFilterMixin(object):
+    """Used in CBVs below to ensure a user can only see /edit his own items."""
+    def get_queryset(self):
+        queryset = super(UserFilterMixin, self).get_queryset()
+        return queryset.filter(user=self.request.user)
+
+
+class ItemListView(LoginRequiredMixin, UserFilterMixin, ListView):
     """List of active items belonging to the current user"""
     model = Item
     context_object_name = 'items'
     paginate_by = 5
 
-    def get_queryset(self):
-        base_qs = super(ItemListView, self).get_queryset()
-        return base_qs.filter(user=self.request.user)
 
-
-class ItemDetailView(LoginRequiredMixin, DetailView):
+class ItemDetailView(LoginRequiredMixin, UserFilterMixin, DetailView):
     """Item detail if it is active and belongs to the current user"""
     model = Item
     fields = ['title', 'description', 'url']
     context_object_name = 'item'
-
-    def get_queryset(self):
-        base_qs = super(ItemDetailView, self).get_queryset()
-        return base_qs.filter(user=self.request.user)
 
 
 class ItemCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
@@ -40,36 +39,27 @@ class ItemCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
         return super(ItemCreateView, self).form_valid(form)
 
 
-class ItemUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+class ItemUpdateView(LoginRequiredMixin, UserFilterMixin, SuccessMessageMixin, UpdateView):
     """Update an item if it is active and belongs to the current user"""
     model = Item
     fields = ['title', 'description', 'url']
     success_url = reverse_lazy('items:items_list')
     success_message = "Item updated."
 
-    def get_queryset(self):
-        base_qs = super(ItemUpdateView, self).get_queryset()
-        return base_qs.filter(user=self.request.user)
-
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super(ItemUpdateView, self).form_valid(form)
 
 
-class ItemDeleteView(LoginRequiredMixin, DeleteView):
+class ItemDeleteView(LoginRequiredMixin, UserFilterMixin, DeleteView):
     """Delete an item if it is active and belongs to the current user"""
 # In DeleteView we must add the success message manually, because
-# SuccessMessageMixin hooks to form_valid which is not present in DeleteView.
+# SuccessMessageMixin hooks to form_valid, which is not present in DeleteView.
     model = Item
     success_url = reverse_lazy('items:items_list')
     success_message = "Item deleted."
 
-    def get_queryset(self):
-        base_qs = super(ItemDeleteView, self).get_queryset()
-        return base_qs.filter(user=self.request.user)
-
-    # override delete method to merely *inactivate* the item, rather than 
-    # deleting truly it from the database.
+    # override delete method to merely "soft delete" the item.
     def delete(self, request, *args, **kwargs):
         self.object = self.get_object()
         self.object.is_active = False
