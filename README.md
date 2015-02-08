@@ -1,5 +1,5 @@
 # tailwind_labs
-This repo includes the code powering http://labs.tailwindsolutions.com - my demo site. It is arranged
+This repo includes the code powering [tailwind labs](http://labs.tailwindsolutions.com) - my demo site. It is arranged
 into a set of (theoretically) reusable django apps.
 
 ## Items
@@ -7,7 +7,7 @@ into a set of (theoretically) reusable django apps.
 items from a [PostgreSQL](http://www.postgresql.org/) database. 
 * Authentication combined with braces' LoginRequiredMixin
 
-## SmartSort
+## Smart Sort
 * Demonstrates a simple API for remotely sorting complex data values
 * AJAX is used to send the data to and from the API
 * The API uses regular Expression pattern matching and custom sort rules
