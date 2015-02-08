@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.urlresolvers import reverse
+from django.contrib.auth.models import User
 
 
 class TimeStampedModel(models.Model):
@@ -25,6 +26,7 @@ class Item(TimeStampedModel):
     description = models.TextField(blank=True)
     is_active = models.BooleanField(default=True)
     url = models.URLField(blank=True)
+    user = models.ForeignKey(User)
 
     # per 2 scoops, always do this before defining a custom manager.
     # among other reasons, it is necessary in order to show both active and 
