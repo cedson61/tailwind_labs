@@ -7,10 +7,21 @@ https://docs.djangoproject.com/en/1.7/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.7/ref/settings/
 """
-# PRODUCTION
+# LOCAL
 import json
 from django.core.exceptions import ImproperlyConfigured
 
+# json-based secrets module
+with open("tailwind_labs/secrets.json") as f:
+
+    secrets = json.loads(f.read())
+
+def get_secret(setting, secrets=secrets):
+    try:
+        return secrets[setting]
+    except KeyError:
+        error_msg = "Set the {0} enviornment variable".format(setting)
+        raise ImproperlyConfigured(error_msg)
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
@@ -22,14 +33,14 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 ADMINS = ('Howard Edson', 'howard.edson@gmail.com',)
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "wi$w&#hqoc6og+n6dz6_x7*#z5!_luc6w&^m43nc()je6-im$%"
+SECRET_KEY = get_secret('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False 
+DEBUG = True
 
 TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = ['.tailwindsolutions.com', ]
+ALLOWED_HOSTS = ['.tailwindsolutions.com', 'localhost']
 
 
 # Application definition
@@ -73,12 +84,12 @@ DATABASES = {
     # }
 
     'default': {
-          'ENGINE': 'django.db.backends.postgresql_psycopg2',
-          'NAME': 'tailwind_labs_db',
-          'USER': 'tailwind_user',
-          'PASSWORD': 'several88',
-          'HOST': 'web404.webfaction.com',
-          'PORT': ''
+          'ENGINE': get_secret('ENGINE'),
+          'NAME': get_secret('NAME'),
+          'USER': get_secret('USER'),
+          'PASSWORD': get_secret('PASSWORD'),
+          'HOST': get_secret('HOST'),
+          'PORT': get_secret('PORT'),
     }
 }
 
@@ -88,7 +99,7 @@ DATABASES = {
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'America/Los_Angeles' 
+TIME_ZONE = 'America/Los_Angeles'
 
 USE_I18N = True
 
@@ -101,10 +112,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = '/home/hedson/webapps/tailwind_labs_static'
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, "static"),
-)
+
+STATIC_ROOT = '/home/howard/dev/django/tailwind_labs/static/'
+
+# STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 
 TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
 
