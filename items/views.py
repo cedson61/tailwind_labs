@@ -8,10 +8,10 @@ from .models import Item
 
 
 class UserFilterMixin(object):
-    """Used in CBVs below to ensure a user can only see /edit his own items."""
+    """Used in CBVs below to ensure a user can only see /edit his own active items."""
     def get_queryset(self):
         queryset = super(UserFilterMixin, self).get_queryset()
-        return queryset.filter(user=self.request.user)
+        return queryset.filter(user=self.request.user, is_active=True)
 
 
 class ItemListView(LoginRequiredMixin, UserFilterMixin, ListView):
