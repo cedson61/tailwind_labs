@@ -54,8 +54,13 @@
       </div><!--/.nav-collapse -->
     </div>
   </nav>
-
+  
   <div class="container">
+  {% if user.is_authenticated %}
+    <div id="login_message">
+      <p class="text-right text-muted">Logged in as <strong>{{ user.username }}</strong></p>
+    </div>
+  {% endif %}
     {% include "messages.html" %}
     {% block content %}{% endblock content %}
   </div>
