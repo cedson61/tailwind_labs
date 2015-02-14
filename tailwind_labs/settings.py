@@ -44,11 +44,13 @@ TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = ['.tailwindsolutions.com', 'localhost']
 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+SITE_ID = 1
 
 # Application definition
 
 INSTALLED_APPS = (
-    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -59,6 +61,10 @@ INSTALLED_APPS = (
     'items',
     'csv_analyzer',
     'smart_sort',
+    'django.contrib.sites',
+    'django.contrib.admin',
+    'registration',
+    # 'debug_toolbar',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -123,6 +129,14 @@ TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
-LOGIN_URL = 'tailwind_labs_login'
-LOGOUT_URL = 'tailwind_labs_logout'
-LOGIN_REDIRECT_URL = 'items:items_list'
+# LOGIN_URL = 'tailwind_labs_login'
+# LOGOUT_URL = 'tailwind_labs_logout'
+# LOGIN_REDIRECT_URL = 'items:items_list'
+
+LOGIN_URL = 'auth_login'
+LOGOUT_URL = 'auth_logout'
+
+LOGIN_REDIRECT_URL = 'home'
+REGISTRATION_OPEN = True
+ACCOUNT_ACTIVATION_DAYS = 7 # One-week activation window
+REGISTRATION_AUTO_LOGIN = False # Automatically log the user in when they click activation link

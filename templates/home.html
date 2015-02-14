@@ -9,26 +9,27 @@
   <div class="jumbotron">
     <h1>Welcome!</h1>
     <p>
-      I created this site as a place to learn, explore and demonstrate some of the web software ideas
-      that collect in my head. Feel free to explore, or <a href="{% url 'about' %}">read more</a> 
-      about how it all works, or have a look at the code in the Tailwind Labs
-      <a href="https://github.com/howard-edson/tailwind_labs">github repository</a>. Please 
-      <a href="mailto:Howard.Edson@gmail.com">email me</a> any questions or feedback!
+      I created this site to learn, and to explore some of the web software ideas
+      that collect in my head. Have a look around, <a href="{% url 'about' %}">read more</a>, 
+      or dig into the code in this site's
+      <a href="https://github.com/howard-edson/tailwind_labs">github repository</a>. 
     </p>
 
   {% if not user.is_authenticated %}
     <p>
-      Some functionality is publicly available, but explore the <a href="{% url 'items:items_list' %}">Items</a> 
-      feature, you'll need to <a class="btn btn-primary" href="{% url 'tailwind_labs_login' %}" role="button">Log in</a>
-    </p>
-    <p>
-      <a href="mailto:howard.edson@gmail.com">Email me</a> to request account credentials.
+      <a href="{% url 'smart_sort:ss_page' %}">Smart Sort</a> and 
+      <a href="{% url 'csv_analyzer:home' %}">CSV Analyzer</a> are public, but to see
+      <a href="{% url 'items:items_list' %}">Items</a> you must 
+      <a href="{% url 'registration_register' %}">Create an account</a> and 
+      <a class="btn btn-primary" href="{% url 'auth_login' %}" role="button">Log in</a>
     </p>
   {% else %}
     <p>You are logged in. Feel free to explore all the links in the top nav bar, or
-       <a class="btn btn-primary" href="{% url 'tailwind_labs_logout' %}" role="button">Log out</a>
+       <a class="btn btn-primary" href="{% url 'auth_logout' %}?next={% url 'home' %}" role="button">Log out</a>
     </p>
   {% endif %}
+
+    <p>Please <a href="mailto:Howard.Edson@gmail.com">email me</a> any questions or feedback!</p>
 
   </div>
 

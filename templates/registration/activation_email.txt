@@ -1,0 +1,8 @@
+Thanks for signing up to check out Tailwind Solutions Labs site!
+
+Please activate the new account for {{ user }} by clicking on the following link
+within {{ expiration_days }} days:
+
+http://{{ site.domain }}{% url 'registration_activate' activation_key %}
+
+Thanks!

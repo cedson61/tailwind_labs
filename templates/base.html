@@ -10,11 +10,15 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
   {% block head_adds %}{% endblock %}
-    <!-- Custom styles for this template -->
-    <link href="{% static "navbar-static-top.css" %}" rel="stylesheet">
-
-  <!-- Bootstrap -->
+<!-- Bootstrap -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+  <!-- Custom styles for this template -->
+  <link href="/static/navbar-static-top.css" rel="stylesheet">
+
+  <!-- site-specific css -->
+  <link href="/static/tailwind_labs.css" rel="stylesheet">
+
 
   <!-- favicon links -->
   <link rel="apple-touch-icon" sizes="57x57" href="/static/favicons/apple-touch-icon-57x57.png">
@@ -65,9 +69,9 @@
         <ul class="nav navbar-nav navbar-right">
           <li {% block nav-about %}{% endblock %}><a href="{% url 'about' %}">About</a></li>
       {% if user.is_authenticated %}
-          <li><a href="{% url 'tailwind_labs_logout' %}">Logout</a></li>
+          <li><a href="{% url 'auth_logout' %}?next={% url 'home' %}">Logout</a></li>
       {% else %}
-          <li {% block nav-login %}{% endblock %}><a href="{% url 'tailwind_labs_login' %}">Login</a></li>  
+          <li {% block nav-login %}{% endblock %}><a href="{% url 'auth_login' %}">Login</a></li>
       {% endif %}
         </ul>
       </div><!--/.nav-collapse -->
@@ -77,7 +81,10 @@
   <div class="container">
   {% if user.is_authenticated %}
     <div id="login_message">
-      <p class="text-right text-muted">Logged in as <strong>{{ user.username }}</strong></p>
+      <p class="text-right text-muted">
+        Logged in as <strong>{{ user.username }}</strong> 
+        (<a href="{% url 'auth_password_change' %}">change password</a>)
+      </p>
     </div>
   {% endif %}
     {% include "messages.html" %}
